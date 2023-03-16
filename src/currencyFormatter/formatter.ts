@@ -1,5 +1,6 @@
 import { Formatter } from './types';
-import { validateNumberInput, validateFormatterInputs } from './validations'
+import { validateNumberInput, validateFormatterInputs } from './validations';
+import { getBanknotesAndCents } from '../utils/currency.utils';
 
 const formatCurrency = function (currencySymbol: string, decimalSeparator: string): Formatter {
   validateFormatterInputs(currencySymbol, decimalSeparator);
@@ -8,10 +9,9 @@ const formatCurrency = function (currencySymbol: string, decimalSeparator: strin
     validateNumberInput(amount);
 
     const numberPrefix = amount < 0 ? "-" : "";
-    const banknoteAmount = (Math.abs(amount) / 100).toFixed(2);
-    const [int, decimal] = banknoteAmount.split('.');
+    const { banknotes, cents } = getBanknotesAndCents(amount);
 
-    return `${numberPrefix}${currencySymbol}${int}${decimalSeparator}${decimal}`;
+    return `${numberPrefix}${currencySymbol}${banknotes}${decimalSeparator}${cents}`;
   };
 };
 
