@@ -2,7 +2,7 @@
   "name": "formatter",
   "version": "1.0.0",
   "description": "Currency formatter",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "compile": "tsc -b",
     "start": "tsc -b && node dist/index",
