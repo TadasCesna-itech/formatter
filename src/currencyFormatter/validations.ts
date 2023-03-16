@@ -1,20 +1,24 @@
 import { isInteger, isNumber, isValidCurrencySymbol, isValidDecimalSeparator } from '../utils/validators.utils';
+import { InputError, CurrencyError, DecimalSeparatorError } from '../errors/input.error'
 
 const validateNumberInput = (number: number) => {
     if (isNumber(number) && isInteger(number)) {
         return
     }
-    throw new Error("Input must be of type integer number");
+    throw new InputError("Input must be of type integer number");
 }
 
 const validateFormatterInputs = (currencySymbol: string, decimalSeparator: string) => {
     if (
-        isValidCurrencySymbol(currencySymbol)
-        && isValidDecimalSeparator(decimalSeparator)
+        !isValidCurrencySymbol(currencySymbol)
     ) {
-        return
+        throw new CurrencyError(currencySymbol);
     }
-    throw new Error("Currency symbol not supported or invalid decimal separator provided");
+    if (
+        !isValidDecimalSeparator(decimalSeparator)
+    ) {
+        throw new DecimalSeparatorError(decimalSeparator);
+    }
 }
 
 export { validateNumberInput, validateFormatterInputs } 

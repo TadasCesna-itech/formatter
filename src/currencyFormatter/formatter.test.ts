@@ -1,4 +1,5 @@
 import { formatCurrency, getUK, getEuro } from "./formatter"
+import { InputError, DecimalSeparatorError, CurrencyError } from "../errors/input.error"
 
 describe('getUK', () => {
   it('should format UK currency correctly', () => {
@@ -24,7 +25,7 @@ describe('getEuro', () => {
 
 describe('formatCurrency', () => {
   it('Throws an input error if currency is not supported', () => {
-    expect(() => formatCurrency('.', '.')).toThrow(Error);
+    expect(() => formatCurrency('.', '.')).toThrow(CurrencyError);
   });
 
   it.each([
@@ -39,7 +40,7 @@ describe('formatCurrency', () => {
     (currencySymbol, decimalSeparator, value) => {
       const getUK = formatCurrency(currencySymbol, decimalSeparator);
 
-      expect(() => getUK(value)).toThrow(Error);
+      expect(() => getUK(value)).toThrow(InputError);
     }
   );
 
@@ -49,7 +50,7 @@ describe('formatCurrency', () => {
   ])(
     "Throws an input error if provided decimal separator is invalid",
     (currencySymbol, decimalSeparator, value) => {
-      expect(() => formatCurrency(currencySymbol, decimalSeparator)).toThrow(Error);
+      expect(() => formatCurrency(currencySymbol, decimalSeparator)).toThrow(DecimalSeparatorError);
     }
   );
 
