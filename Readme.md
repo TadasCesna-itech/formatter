@@ -1,11 +1,22 @@
 ### Currency Formatter
-This is a small library for formatting currency amounts into strings, according to a given currency symbol and decimal separator. It includes some basic input validation to ensure that the amount is a valid number.
+This is a small formatter that formats currency amounts into strings, according to a given currency symbol and decimal separator.
 
-## Installation
-You can install this library via NPM:
+## Installation & launch
+You can install this with npm command.
 
 ```
 npm install 
+```
+
+Launch it with.
+```
+npm start 
+```
+It should return to the terminal an example of formatter code for Euros and Pounds.
+
+```
+€173,05
+£210.55
 ```
 
 ## Usage
